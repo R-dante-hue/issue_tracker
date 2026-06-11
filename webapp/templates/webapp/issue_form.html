@@ -1,0 +1,9 @@
+{% extends 'webapp/base.html' %}
+{% block title %}{% if issue %}Редактировать{% else %}Добавить{% endif %} задачу{% endblock %}
+{% block content %}
+<h1 class="mb-4">{% if issue %}Редактировать{% else %}Добавить{% endif %} задачу</h1>
+<form method="post">{% csrf_token %}{{ form.as_p }}
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a href="{% url 'index' %}" class="btn btn-outline-secondary">Отмена</a>
+</form>
+{% endblock %}

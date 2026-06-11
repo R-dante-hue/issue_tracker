@@ -1,0 +1,10 @@
+{% extends 'webapp/base.html' %}
+{% block title %}Удалить задачу{% endblock %}
+{% block content %}
+<h1 class="mb-4">Удалить задачу?</h1>
+<div class="card mb-3"><div class="card-body"><h5>{{ issue.summary }}</h5><p>{{ issue.status.name }} | {{ issue.issue_type.name }}</p></div></div>
+<form method="post">{% csrf_token %}
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a href="{% url 'index' %}" class="btn btn-outline-secondary">Отмена</a>
+</form>
+{% endblock %}

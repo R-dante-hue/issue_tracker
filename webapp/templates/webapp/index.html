@@ -1,0 +1,13 @@
+{% extends 'webapp/base.html' %}
+{% block content %}
+<h1 class="mb-4">Список задач</h1>
+{% for issue in issues %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5><a href="{% url 'issue_detail' issue.pk %}">{{ issue.summary }}</a></h5>
+        <span class="badge bg-secondary">{{ issue.issue_type.name }}</span>
+        <span class="badge {% if issue.status.name == 'New' %}bg-primary{% elif issue.status.name == 'In Progress' %}bg-warning{% else %}bg-success{% endif %}">{{ issue.status.name }}</span>
+    </div>
+</div>
+{% empty %}<p>Задач пока нет.</p>{% endfor %}
+{% endblock %}
