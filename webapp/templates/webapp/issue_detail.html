@@ -2,7 +2,7 @@
 {% block title %}{{ issue.summary }}{% endblock %}
 {% block content %}
 <h1>{{ issue.summary }}</h1>
-<p>Тип: {{ issue.issue_type.name }}</p>
+<p>Типы: {% for t in issue.types.all %}<span class="badge bg-secondary">{{ t.name }}</span> {% endfor %}</p>
 <p>Статус: {{ issue.status.name }}</p>
 <p>{{ issue.description }}</p>
 <p class="text-muted">Создано: {{ issue.created_at|date:"d.m.Y H:i" }}</p>

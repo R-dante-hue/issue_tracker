@@ -27,7 +27,7 @@ class Issue(models.Model):
     summary = models.CharField(max_length=200, verbose_name='Краткое описание')
     description = models.TextField(verbose_name='Полное описание', blank=True, null=True)
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name='Статус')
-    issue_type = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name='Тип')
+    types = models.ManyToManyField(Type, related_name='issues', blank=True, verbose_name='Типы')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления')
 

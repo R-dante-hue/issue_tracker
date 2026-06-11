@@ -8,15 +8,16 @@ class IssueForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-select'}),
         label='Статус'
     )
-    issue_type = forms.ModelChoiceField(
+    types = forms.ModelMultipleChoiceField(
         queryset=Type.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-select'}),
-        label='Тип'
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
+        label='Типы',
+        required=False
     )
 
     class Meta:
         model = Issue
-        fields = ['summary', 'description', 'status', 'issue_type']
+        fields = ['summary', 'description', 'status', 'types']
         widgets = {
             'summary': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),

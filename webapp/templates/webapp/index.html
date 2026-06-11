@@ -5,7 +5,11 @@
 <div class="card mb-3">
     <div class="card-body">
         <h5><a href="{% url 'issue_detail' issue.pk %}">{{ issue.summary }}</a></h5>
-        <span class="badge bg-secondary">{{ issue.issue_type.name }}</span>
+        <p>
+            {% for t in issue.types.all %}
+            <span class="badge bg-secondary">{{ t.name }}</span>
+            {% endfor %}
+        </p>
         <span class="badge {% if issue.status.name == 'New' %}bg-primary{% elif issue.status.name == 'In Progress' %}bg-warning{% else %}bg-success{% endif %}">{{ issue.status.name }}</span>
     </div>
 </div>
