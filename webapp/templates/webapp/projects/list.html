@@ -1,0 +1,19 @@
+{% extends 'webapp/base.html' %}
+{% block content %}
+<h1>Проекты</h1>
+
+{% include 'webapp/partial/search_form.html' %}
+
+{% if projects %}
+    {% for project in projects %}
+    <div class="card mb-2">
+        <div class="card-body">
+            <h5><a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a></h5>
+        </div>
+    </div>
+    {% endfor %}
+    {% include 'webapp/partial/paginator.html' %}
+{% else %}
+    <p>Проекты не найдены</p>
+{% endif %}
+{% endblock %}
