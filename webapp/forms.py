@@ -1,28 +1,26 @@
 from django import forms
-from django.core.validators import MinLengthValidator, RegexValidator
-from .models import Issue
+from .models import Issue, Project
 
 
 class IssueForm(forms.ModelForm):
-    summary = forms.CharField(
-        label='Краткое описание',
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
-        validators=[
-            MinLengthValidator(5, message='Заголовок должен быть минимум 5 символов'),
-            RegexValidator(r'^[A-Z]', message='Заголовок должен начинаться с заглавной буквы'),
-        ]
-    )
-
     class Meta:
         model = Issue
         fields = ['summary', 'description', 'status', 'types']
         widgets = {
+            'summary': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
             'status': forms.Select(attrs={'class': 'form-select'}),
-            'types': forms.CheckboxSelectMultiple(),
+            'types': forms.SelectMultiple(attrs={'class': 'form-select', 'size': '4'}),
         }
-        labels = {
-            'description': 'Полное описание',
-            'status': 'Статус',
-            'types': 'Типы',
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['title', 'description', 'start_date', 'end_date']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'start_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
