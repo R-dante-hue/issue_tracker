@@ -1,0 +1,16 @@
+{% extends 'webapp/base.html' %}
+{% block content %}
+<h1>{{ project.title }}</h1>
+<p>{{ project.description }}</p>
+<p>Начало: {{ project.start_date }} | Конец: {{ project.end_date|default:'—' }}</p>
+<a href="{% url 'project_update' project.pk %}" class="btn btn-warning btn-sm">Ред.</a>
+<a href="{% url 'project_delete' project.pk %}" class="btn btn-danger btn-sm">Удалить</a>
+<a href="{% url 'project_issue_create' project.pk %}" class="btn btn-primary btn-sm">+ Задача</a>
+<hr><h3>Задачи</h3>
+{% for issue in issues %}
+<div class="card mb-2"><div class="card-body">
+<h5><a href="{% url 'issue_detail' issue.pk %}">{{ issue.summary }}</a></h5>
+<span class="badge bg-secondary">{{ issue.status.name }}</span>
+</div></div>
+{% empty %}<p>Нет задач</p>{% endfor %}
+{% endblock %}

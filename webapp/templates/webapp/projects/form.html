@@ -1,6 +1,6 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
-<h1>{% if issue %}Редактировать{% else %}Создать{% endif %} задачу</h1>
+<h1>{% if project %}Редактировать{% else %}Создать{% endif %} проект</h1>
 <form method="post">{% csrf_token %}{{ form.as_p }}
     <button type="submit" class="btn btn-success">Сохранить</button>
     <a href="{% url 'project_list' %}" class="btn btn-outline-secondary">Отмена</a>

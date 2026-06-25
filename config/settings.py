@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webapp',
+    'accounts',
 ]
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'project_list'
+LOGOUT_REDIRECT_URL = 'project_list'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

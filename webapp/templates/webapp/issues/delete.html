@@ -1,0 +1,8 @@
+{% extends 'webapp/base.html' %}
+{% block content %}
+<h1>Удалить задачу "{{ issue.summary }}"?</h1>
+<form method="post">{% csrf_token %}
+    <button type="submit" class="btn btn-danger">Да</button>
+    <a href="{% url 'project_detail' issue.project.pk %}" class="btn btn-outline-secondary">Отмена</a>
+</form>
+{% endblock %}
