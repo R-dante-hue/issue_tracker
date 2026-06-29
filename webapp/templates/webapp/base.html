@@ -8,19 +8,23 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="/">📋 Трекер</a>
-            <div class="navbar-nav">
-                <a class="nav-link" href="/">Проекты</a>
-                {% if user.is_authenticated %}
-                <a class="nav-link" href="/project/create/">Создать проект</a>
-                <a class="nav-link" href="/accounts/logout/">Выход ({{ user.username }})</a>
-                {% else %}
-                <a class="nav-link" href="/accounts/login/">Вход</a>
-                {% endif %}
-            </div>
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'project_list' %}">Трекер</a>
+        <div class="navbar-nav">
+            <a class="nav-link" href="{% url 'project_list' %}">Проекты</a>
+            {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'project_create' %}">Создать проект</a>
+            <form method="post" action="{% url 'accounts:logout' %}" style="display:inline">
+                {% csrf_token %}
+                <button type="submit" class="nav-link btn btn-link" style="padding:8px">Выход ({{ user.username }})</button>
+            </form>
+            {% else %}
+            <a class="nav-link" href="{% url 'accounts:login' %}">Вход</a>
+            <a class="nav-link" href="{% url 'accounts:register' %}">Регистрация</a>
+            {% endif %}
         </div>
-    </nav>
+    </div>
+</nav>
     <div class="container">{% block content %}{% endblock %}</div>
 </body>
 </html>
