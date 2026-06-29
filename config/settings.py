@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'accounts',
 ]
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'project_list'
 LOGOUT_REDIRECT_URL = 'project_list'
 
