@@ -28,6 +28,12 @@ class Project(models.Model):
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
     start_date = models.DateField(verbose_name='Дата начала')
     end_date = models.DateField(verbose_name='Дата окончания', blank=True, null=True)
+    users = models.ManyToManyField(
+        'auth.User',
+        related_name='projects',
+        blank=True,
+        verbose_name='Пользователи'
+    )
 
     class Meta:
         verbose_name = 'Проект'
@@ -35,7 +41,7 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
-
+    
 
 class Issue(models.Model):
     summary = models.CharField(max_length=200, verbose_name='Краткое описание')
